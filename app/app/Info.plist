@@ -21,5 +21,12 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Your app needs access to the local network to discover and connect to nearby devices.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_foobar._tcp</string>
+		<string>_foobar._udp</string>
+	</array>
 </dict>
 </plist>

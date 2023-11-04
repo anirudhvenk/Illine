@@ -25,7 +25,18 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     }
     
     @IBAction func testConnect(_ sender: Any) {
-        print("Button Pressed")
+        let ac = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Host a session", style: .default) {_ in //here we will add a closure to host a session
+            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType:  "foobar", discoveryInfo: nil, session: self.mcSession)
+            self.mcAdvertiserAssistant.start()
+        })
+        ac.addAction(UIAlertAction(title: "Join a session", style: .default) {_ in //here we will add a closure to join a session
+            let mcBrowser = MCBrowserViewController(serviceType: "foobar", session: self.mcSession)
+            mcBrowser.delegate = self
+            self.present(mcBrowser, animated: true, completion: nil)
+        })
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
     }
     
     
@@ -55,9 +66,5 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil,  encryptionPreference:.required)
         mcSession.delegate = self
-        // Do any additional setup after loading the view.
     }
-
-
 }
-
