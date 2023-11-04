@@ -22,5 +22,5 @@ req.on('error', function(e) {
 });
 
 // Write data to request body
-req.write(JSON.stringify({Josh: ['Dev']}));
+req.write(JSON.stringify({asd: ["as", "fdsf"]}));
 req.end();
