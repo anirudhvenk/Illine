@@ -1,7 +1,7 @@
 var http = require('http');
 
 var options = {
-  hostname: '127.0.0.1',
+  hostname: '10.193.89.254',
   port: 5000,
   path: '/add',
   method: 'POST',
@@ -22,5 +22,5 @@ req.on('error', function(e) {
 });
 
 // Write data to request body
-req.write(JSON.stringify({Ani: ['Lakshya', 'Adam'], Lakshya: ['Ani', 'Adam'], Adam: ['Lakshya']}));
+req.write(JSON.stringify({Ani: [], Lakshya: ['Ani', 'Adam'], Adam: ['Lakshya']}));
 req.end();

@@ -33,6 +33,7 @@ class LineGraph:
         P.write_png('./static/images/graph.png')
         # nx.draw(graph, with_labels=True)
         # plt.savefig('plotgraph.png', dpi=300, bbox_inches='tight')
+        
     def getmaxdistance(self):
         line = False
         graph = nx.from_numpy_array(np.asarray(self.adjacency_matrix))
