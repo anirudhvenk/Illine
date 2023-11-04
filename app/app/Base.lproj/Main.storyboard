@@ -16,57 +16,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwg-tD-XKK">
-                                <rect key="frame" x="80" y="199" width="233" height="64"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Join/Host Connection"/>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iF-q8-Gax">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="0.96611279250000004" green="0.3713166886" blue="0.27043920580000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textShadowColor" red="0.96611279250000004" green="0.3713166886" blue="0.27043920580000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Illine" id="jZQ-pf-XGm"/>
+                                </items>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" fixedFrame="YES" barStyle="black" placeholder="Search Dining Hall" translatesAutoresizingMaskIntoConstraints="NO" id="VDu-kW-8WP">
+                                <rect key="frame" x="0.0" y="103" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="testConnect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nce-l0-qEA"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="BX4-8v-cOG"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxV-nJ-xOv">
-                                <rect key="frame" x="135" y="312" width="123" height="58"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Debug"/>
-                                <connections>
-                                    <action selector="testDebug:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UXB-57-tJZ"/>
-                                </connections>
-                            </button>
+                            </searchBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBt-GU-cTx">
+                                <rect key="frame" x="0.0" y="147" width="393" height="671"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="nH3-cg-78J"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="tzw-7r-row"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="sxV-nJ-xOv" firstAttribute="top" secondItem="cwg-tD-XKK" secondAttribute="bottom" constant="29" id="777-Yl-uUJ"/>
-                            <constraint firstItem="cwg-tD-XKK" firstAttribute="centerX" secondItem="sxV-nJ-xOv" secondAttribute="centerX" id="SYc-Ep-fnO"/>
-                            <constraint firstItem="cwg-tD-XKK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="350" id="VEB-g4-vjV"/>
-                            <constraint firstItem="cwg-tD-XKK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="124" id="atO-yD-I4X"/>
-                            <constraint firstItem="cwg-tD-XKK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="iHu-sX-XTw"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="debug" destination="sxV-nJ-xOv" id="KPL-ZC-Gnw"/>
-                        <outlet property="testConnect" destination="cwg-tD-XKK" id="4l4-4n-nTw"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="IKu-pW-zXa">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d6M-HT-y96" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController id="seC-Wv-wG0" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yPM-vb-XYY">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="CAj-ck-De7"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="dy3-O7-11K"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="772" y="-2"/>
         </scene>
     </scenes>
     <color key="tintColor" systemColor="systemOrangeColor"/>
