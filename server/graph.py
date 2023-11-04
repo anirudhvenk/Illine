@@ -33,5 +33,31 @@ class LineGraph:
         P.write_png('./static/images/graph.png')
         # nx.draw(graph, with_labels=True)
         # plt.savefig('plotgraph.png', dpi=300, bbox_inches='tight')
+    def getmaxdistance(self):
+        line = False
+        graph = nx.from_numpy_array(np.asarray(self.adjacency_matrix))
+        distances = {}
+    
+         # Use BFS to traverse the graph and calculate distances.
+        for node in nx.bfs_tree(graph, source=start_node):
+            distance = nx.shortest_path_length(graph, source=start_node, target=node)
+            distances[node] = distance
+    
+    # Find the farthest node by maximum distance.
+        farthest = max(distances, key=distances.get)
+        if(farthest>10):
+            return farthest
+        return 0
+    def findshortestpaths(self):
+        graph = nx.from_numpy_array(np.asarray(self.adjacency_matrix))
+        return nx.shortest_path(graph, source = start_node , target = node)
+    def findfarthestnode(self):
+        graph = nx.from_numpy_array(np.asarray(self.adjacency_matrix))
+        shortest_path_lengths = nx.single_source_shortest_path_length(graph, start_node)
+    
+        farthest = max(shortest_path_lengths, key=shortest_path_lengths.get)
+    
+        return farthest
+    
         
-        
+
