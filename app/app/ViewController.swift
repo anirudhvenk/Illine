@@ -75,7 +75,7 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Bar Items"
-        view.backgroundColor = .systemPink
+        view.backgroundColor = .systemBlue
         configureItems()
         peerID = MCPeerID(displayName: UUID().uuidString)
         mcSession = MCSession(peer: peerID, securityIdentity: nil,  encryptionPreference:.required)
