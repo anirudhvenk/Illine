@@ -12,24 +12,22 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="app" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="center" semanticContentAttribute="spatial" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwg-tD-XKK">
-                                <rect key="frame" x="124" y="409" width="126" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwg-tD-XKK">
+                                <rect key="frame" x="80" y="199" width="233" height="64"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Test Connect"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Join/Host Connection"/>
                                 <connections>
                                     <action selector="testConnect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nce-l0-qEA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxV-nJ-xOv">
-                                <rect key="frame" x="150" y="473" width="75" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxV-nJ-xOv">
+                                <rect key="frame" x="135" y="312" width="123" height="58"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Debug"/>
                                 <connections>
                                     <action selector="testDebug:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UXB-57-tJZ"/>
                                 </connections>
@@ -37,6 +35,13 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sxV-nJ-xOv" firstAttribute="top" secondItem="cwg-tD-XKK" secondAttribute="bottom" constant="29" id="777-Yl-uUJ"/>
+                            <constraint firstItem="cwg-tD-XKK" firstAttribute="centerX" secondItem="sxV-nJ-xOv" secondAttribute="centerX" id="SYc-Ep-fnO"/>
+                            <constraint firstItem="cwg-tD-XKK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="350" id="VEB-g4-vjV"/>
+                            <constraint firstItem="cwg-tD-XKK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="124" id="atO-yD-I4X"/>
+                            <constraint firstItem="cwg-tD-XKK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="iHu-sX-XTw"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="debug" destination="sxV-nJ-xOv" id="KPL-ZC-Gnw"/>
@@ -47,11 +52,30 @@
             </objects>
             <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="IKu-pW-zXa">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d6M-HT-y96" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="seC-Wv-wG0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yPM-vb-XYY">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="CAj-ck-De7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dy3-O7-11K"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="772" y="-2"/>
+        </scene>
     </scenes>
-    <color key="tintColor" red="0.96611279249191284" green="0.37131668857758365" blue="0.2704392058043088" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+    <color key="tintColor" systemColor="systemOrangeColor"/>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

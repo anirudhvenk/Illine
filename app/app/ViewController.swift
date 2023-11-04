@@ -98,4 +98,12 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
        invitationHandler(true, mcSession)
     }
+    
+    private func configureItems() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem (
+            barButtonSystemItem: .search,
+            target: self,
+            action: nil
+        )
+    }
 }
