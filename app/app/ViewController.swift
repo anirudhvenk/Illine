@@ -8,75 +8,94 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControllerDelegate {
+class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
+    var peers: [MCPeerID] = []
     var peerID: MCPeerID!
     var mcSession: MCSession!
-    var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    var mcNearbyServiceBrowser: MCNearbyServiceBrowser!
+    var mcNearbyServiceAdvertiser: MCNearbyServiceAdvertiser!
     
     @IBOutlet weak var debug: UIButton!
     @IBOutlet weak var testConnect: UIButton!
+
+   func startHosting() {
+       mcNearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "foobar")
+       mcNearbyServiceAdvertiser.delegate = self
+       mcNearbyServiceAdvertiser.startAdvertisingPeer()
+
+       mcNearbyServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: "foobar")
+       mcNearbyServiceBrowser.delegate = self
+       mcNearbyServiceBrowser.startBrowsingForPeers()
+   }
     
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-            case .connected: print ("connected \(peerID)")
-            case .connecting: print ("connecting \(peerID)")
-            case .notConnected: print ("not connected \(peerID)")
-            default: print("unknown status for \(peerID)")
+    private func sendPeersToServer() {
+        var displayNames: [String] = []
+        for peer in peers {
+            displayNames.append(peer.displayName)
+        }
+        
+        let neighbors_dict: [String: [String]] = [self.peerID.displayName: displayNames]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: neighbors_dict)
+        
+        let url = URL(string: "http://10.193.89.254:5000/add")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+          if let error = error {
+              print("Error: \(error)")
+          } else if let data = data {
+              let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+              if let responseJSON = responseJSON as? [String: Any] {
+                  print(responseJSON)
+              }
+          }
+        }
+
+        task.resume()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20.0) { [weak self] in
+            self?.sendPeersToServer()
         }
     }
-    
-    @IBAction func testDebug(_ sender: Any) {
-        if mcSession.connectedPeers.count > 0 {
-            let message = "Hello, world!"
-            if let safeData = message.data(using: .utf8) {
-                do {
-                    try mcSession.send(safeData, toPeers: mcSession.connectedPeers, with: .reliable)
-                } catch let error as NSError {
-                    print("\(error.localizedDescription)")
-                }
-            }
-        }
-    }
-    
-    @IBAction func testConnect(_ sender: Any) {
-        let ac = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .alert)
-        self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType:  "foobar", discoveryInfo: nil, session: self.mcSession)
-        self.mcAdvertiserAssistant.start()
-        ac.addAction(UIAlertAction(title: "Join a session", style: .default) {_ in //here we will add a closure to join a session
-            let mcBrowser = MCBrowserViewController(serviceType: "foobar", session: self.mcSession)
-            mcBrowser.delegate = self
-            self.present(mcBrowser, animated: true, completion: nil)
-        })
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(ac, animated: true)
-    }
-    
-    
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-    }
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-    }
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-    }
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-    }
-    
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true)
-    }
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true)
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let defaults = UserDefaults.standard
+        if let displayName = defaults.string(forKey: "displayName") {
+            self.peerID = MCPeerID(displayName: displayName)
+        } else {
+            let newDisplayName = UUID().uuidString
+            self.peerID = MCPeerID(displayName: newDisplayName)
+            defaults.set(newDisplayName, forKey: "displayName")
+        }
         
-        peerID = MCPeerID(displayName: UUID().uuidString)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil,  encryptionPreference:.required)
-        mcSession.delegate = self
+        mcNearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "foobar")
+        mcNearbyServiceAdvertiser.delegate = self
+        mcNearbyServiceAdvertiser.startAdvertisingPeer()
+        
+        mcNearbyServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: "foobar")
+        mcNearbyServiceBrowser.delegate = self
+        mcNearbyServiceBrowser.startBrowsingForPeers()
+        
+        sendPeersToServer()
+    }
+
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+       peers.append(peerID)
+    }
+
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+       if let index = peers.firstIndex(of: peerID) {
+           peers.remove(at: index)
+       }
+    }
+
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+       invitationHandler(true, mcSession)
     }
 }
