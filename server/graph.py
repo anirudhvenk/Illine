@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+from networkx.drawing.nx_pydot import to_pydot
 import numpy as np
 
 class LineGraph:
@@ -20,7 +21,6 @@ class LineGraph:
                 self.adjacency_matrix[i][j] = 1
         
     def update_adjacency_matrix(self, data):
-        id = next(iter(data))
         for id in data.keys():
             neighbors = data[id]
             self.adjacency_dict[id] = neighbors
@@ -29,7 +29,9 @@ class LineGraph:
         
     def draw_and_save_graph(self):
         graph = nx.from_numpy_array(np.asarray(self.adjacency_matrix))
-        nx.draw(graph, with_labels=True)
+        P = to_pydot(graph)
+        P.write_png('./static/images/graph.png')
+        # nx.draw(graph, with_labels=True)
         # plt.savefig('plotgraph.png', dpi=300, bbox_inches='tight')
         
         
