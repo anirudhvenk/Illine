@@ -12,7 +12,8 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
-
+    
+    @IBOutlet weak var testConnect: UIButton!
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
@@ -22,6 +23,11 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
             default: print("unknown status for \(peerID)")
         }
     }
+    
+    @IBAction func testConnect(_ sender: Any) {
+        print("Button Pressed")
+    }
+    
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
     }
