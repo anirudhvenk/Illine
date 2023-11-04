@@ -13,6 +13,7 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     
+    @IBOutlet weak var debug: UIButton!
     @IBOutlet weak var testConnect: UIButton!
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -24,12 +25,23 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
         }
     }
     
+    @IBAction func testDebug(_ sender: Any) {
+        if mcSession.connectedPeers.count > 0 {
+            let message = "Hello, world!"
+            if let safeData = message.data(using: .utf8) {
+                do {
+                    try mcSession.send(safeData, toPeers: mcSession.connectedPeers, with: .reliable)
+                } catch let error as NSError {
+                    print("\(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
     @IBAction func testConnect(_ sender: Any) {
         let ac = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Host a session", style: .default) {_ in //here we will add a closure to host a session
-            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType:  "foobar", discoveryInfo: nil, session: self.mcSession)
-            self.mcAdvertiserAssistant.start()
-        })
+        self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType:  "foobar", discoveryInfo: nil, session: self.mcSession)
+        self.mcAdvertiserAssistant.start()
         ac.addAction(UIAlertAction(title: "Join a session", style: .default) {_ in //here we will add a closure to join a session
             let mcBrowser = MCBrowserViewController(serviceType: "foobar", session: self.mcSession)
             mcBrowser.delegate = self
@@ -63,7 +75,7 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        peerID = MCPeerID(displayName: UIDevice.current.name)
+        peerID = MCPeerID(displayName: UUID().uuidString)
         mcSession = MCSession(peer: peerID, securityIdentity: nil,  encryptionPreference:.required)
         mcSession.delegate = self
     }
