@@ -16,20 +16,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwg-tD-XKK">
-                                <rect key="frame" x="124" y="409" width="126" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwg-tD-XKK">
+                                <rect key="frame" x="80" y="199" width="233" height="64"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Test Connect"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Join/Host Connection"/>
                                 <connections>
                                     <action selector="testConnect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nce-l0-qEA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxV-nJ-xOv">
-                                <rect key="frame" x="150" y="473" width="75" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxV-nJ-xOv">
+                                <rect key="frame" x="135" y="312" width="123" height="58"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Debug"/>
                                 <connections>
                                     <action selector="testDebug:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UXB-57-tJZ"/>
                                 </connections>
@@ -37,6 +35,13 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sxV-nJ-xOv" firstAttribute="top" secondItem="cwg-tD-XKK" secondAttribute="bottom" constant="29" id="777-Yl-uUJ"/>
+                            <constraint firstItem="cwg-tD-XKK" firstAttribute="centerX" secondItem="sxV-nJ-xOv" secondAttribute="centerX" id="SYc-Ep-fnO"/>
+                            <constraint firstItem="cwg-tD-XKK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="350" id="VEB-g4-vjV"/>
+                            <constraint firstItem="cwg-tD-XKK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="124" id="atO-yD-I4X"/>
+                            <constraint firstItem="cwg-tD-XKK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="iHu-sX-XTw"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="debug" destination="sxV-nJ-xOv" id="KPL-ZC-Gnw"/>

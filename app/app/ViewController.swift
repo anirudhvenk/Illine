@@ -74,9 +74,19 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Bar Items"
+        view.backgroundColor = .systemPink
+        configureItems()
         peerID = MCPeerID(displayName: UUID().uuidString)
         mcSession = MCSession(peer: peerID, securityIdentity: nil,  encryptionPreference:.required)
         mcSession.delegate = self
+    }
+    
+    private func configureItems() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem (
+            barButtonSystemItem: .search,
+            target: self,
+            action: nil
+        )
     }
 }
