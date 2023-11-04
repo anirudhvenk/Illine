@@ -8,7 +8,9 @@ line_graph = LineGraph()
 @app.route('/add', methods=['POST'])
 def get_neighbors():
     data = request.get_json()
+    print(data)
     line_graph.update_adjacency_matrix(data)
+    print(line_graph.adjacency_matrix)
     line_graph.draw_and_save_graph()
     
     return "Data recieved!"

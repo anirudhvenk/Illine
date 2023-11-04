@@ -8,14 +8,28 @@ class LineGraph:
     def __init__(self):
         self.adjacency_dict = {}
         self.adjacency_matrix = []
-        
+      
     def adjacency_dict_to_matrix(self):
         vertices = list(self.adjacency_dict.keys())
         size = len(vertices)
-        self.adjacency_matrix = [[0 for _ in range(size)] for _ in range(size)]
-        
+        self.adjacency_matrix = np.asarray([[0 for _ in range(size)] for _ in range(size)])
+
         for key, values in self.adjacency_dict.items():
             for value in values:
+                if key not in vertices:
+                    vertices.append(key)
+                    new_matrix = np.zeros((size + 1, size + 1))
+                    new_matrix[:size, :size] = self.adjacency_matrix
+                    self.adjacency_matrix = new_matrix
+                    size += 1
+                if value not in vertices:
+                    vertices.append(value)
+                    new_matrix = np.zeros((size + 1, size + 1))
+                    new_matrix[:size, :size] = self.adjacency_matrix
+                    self.adjacency_matrix = new_matrix
+                    size += 1
+
+
                 i = vertices.index(key)
                 j = vertices.index(value)
                 self.adjacency_matrix[i][j] = 1
@@ -28,11 +42,9 @@ class LineGraph:
         self.adjacency_dict_to_matrix()
         
     def draw_and_save_graph(self):
-        graph = nx.from_numpy_array(np.asarray(self.adjacency_matrix))
+        graph = nx.from_numpy_array(self.adjacency_matrix)
         P = to_pydot(graph)
         P.write_png('./static/images/graph.png')
-        # nx.draw(graph, with_labels=True)
-        # plt.savefig('plotgraph.png', dpi=300, bbox_inches='tight')
         
     def getmaxdistance(self):
         line = False
