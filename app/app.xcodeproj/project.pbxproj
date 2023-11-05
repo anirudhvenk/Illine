@@ -16,6 +16,7 @@
 		27F56C842AF5DCF20096ECC5 /* appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F56C832AF5DCF20096ECC5 /* appTests.swift */; };
 		27F56C8E2AF5DCF20096ECC5 /* appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F56C8D2AF5DCF20096ECC5 /* appUITests.swift */; };
 		27F56C902AF5DCF20096ECC5 /* appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F56C8F2AF5DCF20096ECC5 /* appUITestsLaunchTests.swift */; };
+		3C3541512AF70CF700211479 /* DiningHallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3541502AF70CF700211479 /* DiningHallViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		27F56C892AF5DCF20096ECC5 /* appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = appUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F56C8D2AF5DCF20096ECC5 /* appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appUITests.swift; sourceTree = "<group>"; };
 		27F56C8F2AF5DCF20096ECC5 /* appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3C3541502AF70CF700211479 /* DiningHallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiningHallViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				27F56C752AF5DCF20096ECC5 /* Assets.xcassets */,
 				27F56C772AF5DCF20096ECC5 /* LaunchScreen.storyboard */,
 				27F56C7A2AF5DCF20096ECC5 /* Info.plist */,
+				3C3541502AF70CF700211479 /* DiningHallViewController.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			files = (
 				27F56C712AF5DCF00096ECC5 /* ViewController.swift in Sources */,
 				27F56C6D2AF5DCF00096ECC5 /* AppDelegate.swift in Sources */,
+				3C3541512AF70CF700211479 /* DiningHallViewController.swift in Sources */,
 				27F56C6F2AF5DCF00096ECC5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,6 +444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8S5P3VNVNT;
@@ -458,6 +463,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = anirudhv.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -469,6 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8S5P3VNVNT;
@@ -486,6 +493,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = anirudhv.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

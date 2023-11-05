@@ -7,16 +7,40 @@
 
 import UIKit
 import MultipeerConnectivity
+import Foundation
 
-class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
+class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate,  UITableViewDataSource, UITableViewDelegate{
+    
+    
     var peers: [MCPeerID] = []
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcNearbyServiceBrowser: MCNearbyServiceBrowser!
     var mcNearbyServiceAdvertiser: MCNearbyServiceAdvertiser!
+    var diningHallArray: [String] = []
     
+    @IBOutlet weak var diningHall: UITableViewCell!
+    @IBOutlet weak var diningHalls: UITableView!
+    @IBOutlet weak var searchDiningHall: UISearchBar!
     @IBOutlet weak var debug: UIButton!
     @IBOutlet weak var testConnect: UIButton!
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return diningHallArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Handle row selection here
+        let selectedRowData = diningHallArray[indexPath.row]
+        print("Selected row data: \(selectedRowData)")
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = diningHalls.dequeueReusableCell(withIdentifier: "diningHallCell", for: indexPath)
+        let rowData = diningHallArray[indexPath.row]
+        cell.textLabel?.text = rowData
+        return cell
+    }
 
    func startHosting() {
        mcNearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "foobar")
@@ -83,6 +107,7 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
         mcNearbyServiceBrowser.startBrowsingForPeers()
         
         sendPeersToServer()
+        configureItems()
     }
 
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
@@ -100,10 +125,35 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
     }
     
     private func configureItems() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem (
-            barButtonSystemItem: .search,
-            target: self,
-            action: nil
-        )
+        diningHalls.dataSource = self
+        diningHalls.delegate = self
+        addHallsToTable()
     }
+    
+    func addHallsToTable() {
+        for (key, _) in DINING_HALLS {
+            diningHallArray.append(key)
+        }
+        diningHalls.reloadData()
+    }
+
+    let DINING_HALLS: [String : [String]] = ["Field of Greens" : [],
+                                             "Lincoln/Allen Dining Hall" : [],
+                                             "ISR Dining Center" : ["Cafe a la Crumb","Fusion 48",
+                                                                    "Grains & Greens",
+                                                                    "Grillworks",
+                                                                    "Saporito Pizza"],
+                                             "Ikenberry Dining Center" : ["Baked Expectations",
+                                                                          "Euclid Street Deli",
+                                                                          "Gregory Drive Diner",
+                                                                          "IKE InclusiveSolutions",
+                                                                          "Penne Lane",
+                                                                          "Prarie Fire",
+                                                                          "Soytainly"],
+                                             "PAR Dining Hall" : ["Abbondante",
+                                                                  "Abbondante Grill",
+                                                                  "Arugula's",
+                                                                  "La Avenida",
+                                                                  "Provolone"]
+    ]
 }
