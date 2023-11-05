@@ -22,5 +22,5 @@ req.on('error', function(e) {
 });
 
 // Write data to request body
-req.write(JSON.stringify({Dev: ["Ani", "Srikar"]}));
+req.write(JSON.stringify({Head: ["Ani", "Srikar"]}));
 req.end();

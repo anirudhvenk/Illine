@@ -8,6 +8,8 @@ class LineGraph:
     def __init__(self):
         self.adjacency_dict = {}
         self.adjacency_matrix = []
+        self.head_idx = None
+        self.head_graph = None
     
     def get_head_graph(self):
         graph = nx.from_numpy_array(self.adjacency_matrix)
@@ -19,6 +21,8 @@ class LineGraph:
     def adjacency_dict_to_matrix(self):
         vertices = list(self.adjacency_dict.keys())
         size = len(vertices)
+        if (size == 1):
+            self.head_idx = 0
         self.adjacency_matrix = np.asarray([[0 for _ in range(size)] for _ in range(size)])
 
         for key, values in self.adjacency_dict.items():
@@ -40,7 +44,8 @@ class LineGraph:
                 j = vertices.index(value)
                 self.adjacency_matrix[i][j] = 1
                 
-        self.head_idx = vertices.index("Head")
+        # if ("Head" in vertices):
+        #     self.head_idx = vertices.index("Head")
         self.get_head_graph()
         
     def update_adjacency_matrix(self, data):
@@ -51,10 +56,10 @@ class LineGraph:
         self.adjacency_dict_to_matrix()
         
     def draw_and_save_graph(self):
-        # graph = nx.from_numpy_array(self.adjacency_matrix)
-        graph = self.head_graph
-        P = to_pydot(graph)
-        P.write_png('./static/images/graph.png')
+        if (self.head_idx is not None):
+            graph = self.head_graph
+            P = to_pydot(graph)
+            P.write_png('./static/images/graph.png')
         
     def getmaxdistance(self):
         line = False

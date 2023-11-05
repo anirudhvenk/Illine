@@ -11,7 +11,6 @@ import Foundation
 
 class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate,  UITableViewDataSource, UITableViewDelegate{
     
-    
     var peers: [MCPeerID] = []
     var peerID: MCPeerID!
     var mcSession: MCSession!
@@ -23,8 +22,6 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
     @IBOutlet weak var diningHall: UITableViewCell!
     @IBOutlet weak var diningHalls: UITableView!
     @IBOutlet weak var searchDiningHall: UISearchBar!
-    @IBOutlet weak var debug: UIButton!
-    @IBOutlet weak var testConnect: UIButton!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return diningHallArray.count
@@ -82,7 +79,7 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
 
         task.resume()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 20.0) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) { [weak self] in
             self?.sendPeersToServer()
         }
     }
@@ -92,19 +89,9 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
 
         let defaults = UserDefaults.standard
         if let displayName = defaults.string(forKey: "displayName") {
-            if (isHead) {
-                self.peerID = MCPeerID(displayName: "Head")
-            } else {
-                self.peerID = MCPeerID(displayName: displayName)
-            }
+            self.peerID = MCPeerID(displayName: displayName)
         } else {
-            var newDisplayName: String!
-            if (isHead) {
-                newDisplayName = "Head"
-            } else {
-                newDisplayName = UUID().uuidString
-            }
-            
+            let newDisplayName = UUID().uuidString
             self.peerID = MCPeerID(displayName: newDisplayName)
             defaults.set(newDisplayName, forKey: "displayName")
         }

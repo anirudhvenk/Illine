@@ -25,20 +25,11 @@
                                     <color key="textShadowColor" red="0.96611279250000004" green="0.3713166886" blue="0.27043920580000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Illine" id="jZQ-pf-XGm">
-                                        <barButtonItem key="rightBarButtonItem" style="plain" id="POL-o2-7m0">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hC3-Fe-oJo">
-                                                <rect key="frame" x="290" y="4.6666666666666679" width="87" height="35"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Sign In"/>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem title="Illine" id="jZQ-pf-XGm"/>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kQ3-hR-9KU">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="diningHallCell" id="TF5-r8-ECJ">
@@ -64,6 +55,8 @@
                             <constraint firstItem="kQ3-hR-9KU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="44" id="wGa-JA-0Xs"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="diningHalls" destination="kQ3-hR-9KU" id="YRa-kH-vdk"/>
                     </connections>
@@ -77,7 +70,7 @@
             <objects>
                 <viewController storyboardIdentifier="diningHall_info" id="0NW-6M-08P" customClass="DiningHallViewController" customModule="app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P9w-ts-bKb">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="JZ4-tP-fUm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
