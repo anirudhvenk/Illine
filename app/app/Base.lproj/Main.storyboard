@@ -25,32 +25,68 @@
                                     <color key="textShadowColor" red="0.96611279250000004" green="0.3713166886" blue="0.27043920580000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Illine" id="jZQ-pf-XGm"/>
+                                    <navigationItem title="Illine" id="jZQ-pf-XGm">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="POL-o2-7m0">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hC3-Fe-oJo">
+                                                <rect key="frame" x="290" y="4.6666666666666679" width="87" height="35"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Sign In"/>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
-                            <searchBar contentMode="redraw" fixedFrame="YES" barStyle="black" placeholder="Search Dining Hall" translatesAutoresizingMaskIntoConstraints="NO" id="VDu-kW-8WP">
-                                <rect key="frame" x="0.0" y="103" width="393" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="BX4-8v-cOG"/>
-                                </connections>
-                            </searchBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBt-GU-cTx">
-                                <rect key="frame" x="0.0" y="147" width="393" height="671"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="nH3-cg-78J"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="tzw-7r-row"/>
-                            </scrollView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kQ3-hR-9KU">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="diningHallCell" id="TF5-r8-ECJ">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TF5-r8-ECJ" id="9Mj-Fq-vrg">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="0NW-6M-08P" kind="show" id="uKj-wX-H4T"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kQ3-hR-9KU" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="AQV-v8-xmj"/>
+                            <constraint firstItem="kQ3-hR-9KU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="aqP-sj-aH5"/>
+                            <constraint firstItem="kQ3-hR-9KU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hsq-MS-T9d"/>
+                            <constraint firstItem="kQ3-hR-9KU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="44" id="wGa-JA-0Xs"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="diningHalls" destination="kQ3-hR-9KU" id="YRa-kH-vdk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
+        </scene>
+        <!--Dining Hall View Controller-->
+        <scene sceneID="aQW-Pb-7cd">
+            <objects>
+                <viewController storyboardIdentifier="diningHall_info" id="0NW-6M-08P" customClass="DiningHallViewController" customModule="app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P9w-ts-bKb">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="JZ4-tP-fUm"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MH4-fY-M8q"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m82-0v-oLk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="922.90076335877859" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <color key="tintColor" systemColor="systemOrangeColor"/>
@@ -59,7 +95,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
