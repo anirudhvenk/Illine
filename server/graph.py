@@ -10,6 +10,11 @@ class LineGraph:
         self.adjacency_matrix = []
         self.head_idx = None
         self.head_graph = None
+        self.line = None
+        
+        self.past_connect = None
+        self.cycle_count = 0
+        self.wait_time = 0
     
     def get_head_graph(self):
         graph = nx.from_numpy_array(self.adjacency_matrix)
@@ -44,8 +49,6 @@ class LineGraph:
                 j = vertices.index(value)
                 self.adjacency_matrix[i][j] = 1
                 
-        # if ("Head" in vertices):
-        #     self.head_idx = vertices.index("Head")
         self.get_head_graph()
         
     def update_adjacency_matrix(self, data):
@@ -54,6 +57,9 @@ class LineGraph:
             self.adjacency_dict[id] = neighbors
     
         self.adjacency_dict_to_matrix()
+        # print(self.findshortestpaths())
+        if (len(self.findshortestpaths()) >= 3):
+            self.line = self.findshortestpaths()
         
     def draw_and_save_graph(self):
         if (self.head_idx is not None):
@@ -77,14 +83,14 @@ class LineGraph:
             return farthest
         return 0
     
-    
-    
     def findshortestpaths(self):
         graph = nx.from_numpy_array(np.asarray(self.adjacency_matrix))
-        return nx.shortest_path(graph, source = start_node , target = node)
+        farthest_node = self.findfarthestnode()
+        return nx.shortest_path(graph, source=self.head_idx , target=farthest_node)
+    
     def findfarthestnode(self):
         graph = nx.from_numpy_array(np.asarray(self.adjacency_matrix))
-        shortest_path_lengths = nx.single_source_shortest_path_length(graph, start_node)
+        shortest_path_lengths = nx.single_source_shortest_path_length(graph, self.head_idx)
     
         farthest = max(shortest_path_lengths, key=shortest_path_lengths.get)
     
