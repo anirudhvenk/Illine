@@ -10,7 +10,7 @@ def get_neighbors():
     data = request.get_json()
     print(data)
     line_graph.update_adjacency_matrix(data)
-    print(line_graph.adjacency_matrix)
+    # print(line_graph.adjacency_matrix)
     line_graph.draw_and_save_graph()
     
     return "Data recieved!"
@@ -20,4 +20,4 @@ def home():
     return render_template('home.html')
 
 if __name__ == '__main__':
-    app.run(host='10.193.89.254', port=5001)
+    app.run(host='10.193.89.254', port=5000)

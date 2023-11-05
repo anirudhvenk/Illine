@@ -14,6 +14,7 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
     var mcSession: MCSession!
     var mcNearbyServiceBrowser: MCNearbyServiceBrowser!
     var mcNearbyServiceAdvertiser: MCNearbyServiceAdvertiser!
+    var isHead: Bool = false
     
     @IBOutlet weak var debug: UIButton!
     @IBOutlet weak var testConnect: UIButton!
@@ -67,9 +68,19 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
 
         let defaults = UserDefaults.standard
         if let displayName = defaults.string(forKey: "displayName") {
-            self.peerID = MCPeerID(displayName: displayName)
+            if (isHead) {
+                self.peerID = MCPeerID(displayName: "Head")
+            } else {
+                self.peerID = MCPeerID(displayName: displayName)
+            }
         } else {
-            let newDisplayName = UUID().uuidString
+            var newDisplayName: String!
+            if (isHead) {
+                newDisplayName = "Head"
+            } else {
+                newDisplayName = UUID().uuidString
+            }
+            
             self.peerID = MCPeerID(displayName: newDisplayName)
             defaults.set(newDisplayName, forKey: "displayName")
         }

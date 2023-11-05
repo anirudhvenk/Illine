@@ -61,16 +61,19 @@ class LineGraph:
         graph = nx.from_numpy_array(np.asarray(self.adjacency_matrix))
         distances = {}
     
-         # Use BFS to traverse the graph and calculate distances.
-        for node in nx.bfs_tree(graph, source=start_node):
-            distance = nx.shortest_path_length(graph, source=start_node, target=node)
+        # Use BFS to traverse the graph and calculate distances.
+        for node in nx.bfs_tree(graph, source=self.head_idx):
+            distance = nx.shortest_path_length(graph, source=self.head_idx, target=node)
             distances[node] = distance
     
-    # Find the farthest node by maximum distance.
+        # Find the farthest node by maximum distance.
         farthest = max(distances, key=distances.get)
         if(farthest>10):
             return farthest
         return 0
+    
+    
+    
     def findshortestpaths(self):
         graph = nx.from_numpy_array(np.asarray(self.adjacency_matrix))
         return nx.shortest_path(graph, source = start_node , target = node)
