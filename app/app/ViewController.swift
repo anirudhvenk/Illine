@@ -27,18 +27,32 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
         return diningHallArray.count
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Handle row selection here
-        let selectedRowData = diningHallArray[indexPath.row]
-        print("Selected row data: \(selectedRowData)")
-    }
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = diningHalls.dequeueReusableCell(withIdentifier: "diningHallCell", for: indexPath)
         let rowData = diningHallArray[indexPath.row]
         cell.textLabel?.text = rowData
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Handle row selection here
+        let selectedRowData = diningHallArray[indexPath.row]
+        performSegue(withIdentifier: "get_info", sender: selectedRowData)
+        print("Selected row data: \(selectedRowData)")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "get_info" {
+            if let destinationVC = segue.destination as? DiningHallViewController {
+                if let selectedElement = sender as? UITableViewCell {
+                    destinationVC.selectedData = selectedElement.textLabel?.text
+                } else if let selectedText = sender as? String {
+                    destinationVC.selectedData = selectedText
+                }
+            }
+        }
+    }
+
 
    func startHosting() {
        mcNearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "foobar")
@@ -155,3 +169,5 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
                                                                   "Provolone"]
     ]
 }
+
+

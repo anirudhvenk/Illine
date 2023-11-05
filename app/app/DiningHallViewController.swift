@@ -8,12 +8,13 @@
 import UIKit
 
 class DiningHallViewController: UIViewController {
+    @IBOutlet weak var diningHall_name: UILabel!
+    var selectedData: String?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            diningHall_name.text = selectedData
+        }
     
 
     /*
