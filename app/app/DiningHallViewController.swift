@@ -43,6 +43,19 @@ class DiningHallViewController: UIViewController, UITableViewDelegate, UITableVi
         return 80 // Set the desired height here
     }
     
+    func getWaitTime() async throws -> Int {
+        let url = URL(string: "http://10.193.89.254:5000/getWaitTime")!
+        var request = URLRequest(url: url)
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let waitTime = try JSONDecoder().decode(Int.self, from: data)
+            return waitTime
+        } catch {
+            print("Failed to fetch wait time: \(error)")
+            throw error
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let randomInt = Int(arc4random_uniform(30)) + 5
         let cell = tableView.dequeueReusableCell(withIdentifier: "station_view", for: indexPath)
@@ -52,7 +65,15 @@ class DiningHallViewController: UIViewController, UITableViewDelegate, UITableVi
         if (cell.textLabel?.text != "Sky Garden"){
             cell.detailTextLabel?.text = String(randomInt) + " minutes"
         } else {
-            cell.detailTextLabel?.text = ""
+            Task {
+                do {
+                    let waitTime = try await getWaitTime()
+                    cell.detailTextLabel?.text = String(waitTime) + " minutes"
+                } catch {
+                    print("Failed to fetch users wait time: \(error)")
+                    cell.detailTextLabel?.text = ""
+               }
+            }
         }
         cell.textLabel?.font = UIFont.systemFont(ofSize: 18.5)
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 15.5)
