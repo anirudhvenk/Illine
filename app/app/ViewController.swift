@@ -27,10 +27,15 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
         return diningHallArray.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80 // Set the desired height here
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = diningHalls.dequeueReusableCell(withIdentifier: "diningHallCell", for: indexPath)
         let rowData = diningHallArray[indexPath.row]
         cell.textLabel?.text = rowData
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 18.5)
         return cell
     }
     
