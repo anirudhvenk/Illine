@@ -47,14 +47,8 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="diningHallCell" rowHeight="64" id="TF5-r8-ECJ">
                                         <rect key="frame" x="0.0" y="50" width="393" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
-<<<<<<< HEAD
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TF5-r8-ECJ" id="9Mj-Fq-vrg" customClass="UITableViewCell">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
-=======
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TF5-r8-ECJ" id="9Mj-Fq-vrg">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="64"/>
->>>>>>> 1c0afa62a4cbe497b170d5527749973ec252bf6c
-                                            <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="0NW-6M-08P" kind="showDetail" identifier="get_info" id="QfY-SD-FDd"/>
