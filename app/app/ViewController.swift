@@ -74,7 +74,7 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearby
         
         let jsonData = try? JSONSerialization.data(withJSONObject: neighbors_dict)
         
-        let url = URL(string: "http://10.193.89.254:5001/add")!
+        let url = URL(string: "http://10.193.89.254:5000/add")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
